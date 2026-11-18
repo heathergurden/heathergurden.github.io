@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Heather Gurden: technical enablement, software training, and technical communication.">
+    <title>Heather Gurden — Technical Communication & UX Portfolio</title>
+    <!-- CSS -->
+    <link href="./output.css" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #111827;
+            background-color: #FFFFFF;
+        }
+        h1, h2, h3, .font-display {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        /* Minimalist scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F8FAFC;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-900 antialiased selection:bg-royal-600 selection:text-white relative">
+
+    <!-- Global Sticky Navigation Header -->
+    <header class="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-sm border-b border-slate-200 transition-all">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand / Name -->
+                <a href="#home" class="group flex items-center space-x-2.5">
+                    <div class="w-8 h-8 rounded bg-obsidian flex items-center justify-center text-white font-display font-bold text-sm group-hover:bg-royal-600 transition-colors">
+                        HG
+                    </div>
+                    <span class="font-display font-bold text-base text-slate-900 tracking-tight group-hover:text-royal-600 transition-colors">
+                        Heather Gurden
+                    </span>
+                </a>
+
+                <!-- Right-Aligned Navigation & Resume Button -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <nav class="flex items-center space-x-7 text-sm font-medium text-slate-600">
+                        <a href="#home" class="hover:text-royal-600 transition-colors">Home</a>
+                        <a href="#portfolio" class="hover:text-royal-600 transition-colors">My Work</a>
+                        <a href="#about" class="hover:text-royal-600 transition-colors">About Me</a>
+                        <a href="#contact" class="hover:text-royal-600 transition-colors">Contact</a>
+                    </nav>
+
+                    <a href="https://drive.google.com/file/d/1mES4fBRtfaSJq5SNUoKhLvlFe9V4P2yR/view?usp=sharing" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="inline-flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded bg-royal-600 text-white hover:bg-royal-700 transition-colors">
+                        <span>Resume</span>
+                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="flex md:hidden">
+                    <button id="mobile-menu-btn" type="button" class="p-2 rounded text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 bg-white px-6 pt-2 pb-5 space-y-3">
+            <a href="#home" onclick="closeMobileMenu()" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">Home</a>
+            <a href="#portfolio" onclick="closeMobileMenu()" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">My Work</a>
+            <a href="#about" onclick="closeMobileMenu()" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">About Me</a>
+            <a href="#contact" onclick="closeMobileMenu()" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">Contact</a>
+            <div class="pt-2 border-t border-slate-100">
+                <a href="https://drive.google.com/file/d/1mES4fBRtfaSJq5SNUoKhLvlFe9V4P2yR/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center space-x-1.5 w-full py-2.5 text-xs font-semibold rounded bg-royal-600 text-white">
+                    <span>Download Resume</span>
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Body Container -->
+    <main id="home">
+        
+        <!-- HERO SECTION (Deep Obsidian Band) -->
+        <section class="bg-obsidian text-white pt-14 pb-20 md:pt-20 md:pb-24 relative overflow-hidden">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b25_1px,transparent_1px),linear-gradient(to_bottom,#1e293b25_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] pointer-events-none"></div>
+
+            <div class="max-w-5xl mx-auto px-6 relative">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Left Column -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <p class="text-xs font-bold uppercase tracking-widest text-pink-600">
+                            Technical Enablement &amp; UX Portfolio
+                        </p>
+
+                        <h1 class="text-4xl sm:text-5xl lg:text-[54px] font-extrabold tracking-tight text-white leading-[1.08]">
+                            Bridging Complex <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#1f4fd1] via-sky-400 to-blue-300">Tech &amp; Human Adoption</span>
+                        </h1>
+
+                        <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-xl">
+                            I’m Heather Gurden, a technology enablement specialist who believes new technology only works when people understand it. I bring together enterprise architecture, visual design, and human-centered strategy to help people adopt new tools with confidence.
+                        </p>
+
+                        <div class="pt-1 flex flex-wrap gap-3.5">
+                            <a href="#portfolio" class="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm shadow-lg shadow-blue-600/25 transition-all inline-flex items-center space-x-2 group">
+                                <span>Explore Portfolio</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"></i>
+                            </a>
+                            <a href="#about" class="px-6 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-semibold text-sm transition-all inline-flex items-center space-x-2">
+                                <i data-lucide="user" class="w-4 h-4 text-slate-400"></i>
+                                <span>About Me</span>
+                            </a>
+                        </div>
+
+                        <!-- 3-Column Metrics Row -->
+                        <div class="pt-6 border-t border-slate-800 grid grid-cols-3 gap-6 max-w-lg">
+                            <div>
+                                <p class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold">Experience</p>
+                                <p class="font-display text-lg font-extrabold text-white mt-0.5">15+ Years</p>
+                            </div>
+                            <div>
+                                <p class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold">Specialty</p>
+                                <p class="font-display text-lg font-extrabold text-white mt-0.5 leading-snug">M365 &amp; Enablement</p>
+                            </div>
+                            <div>
+                                <p class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold">Focus</p>
+                                <p class="font-display text-lg font-extrabold text-white mt-0.5">UX &amp; Strategy</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Portrait Card -->
+                    <div class="lg:col-span-5 flex justify-center lg:justify-end">
+                        <div class="relative w-full max-w-sm">
+                            <div class="rounded-2xl bg-slate-900/90 border border-slate-800 p-1 shadow-2xl">
+                                <div class="aspect-[4/5] rounded-xl overflow-hidden bg-slate-800 relative group">
+                                    <img src="https://drive.google.com/thumbnail?id=1nW4xbrToAZuquNbszkM8fX_FoE6EMt92&sz=w800" 
+                                         alt="Heather Gurden Headshot" 
+                                         class="w-full h-full object-cover object-top">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent"></div>
+                                    
+                                    <!-- Overlay Badge -->
+                                    <div class="absolute bottom-3.5 left-3.5 right-3.5 p-4 rounded-xl backdrop-blur-md bg-slate-900/90 border border-slate-700/70">
+                                        <p class="font-display text-sm font-bold text-white">Heather Gurden</p>
+                                        <p class="text-xs text-blue-400 mt-0.5">IT Project Manager &amp; Enablement Lead</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO GRID SECTION -->
+        <section id="portfolio" class="bg-white py-20 border-b border-slate-200">
+            <div class="max-w-5xl mx-auto px-6">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-pink-600 mb-2">Portfolio &amp; Deliverables</p>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">Selected Work</h2>
+                    </div>
+
+                    <!-- Category Filter Pills -->
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="filterPortfolio('all')" class="filter-btn active px-3.5 py-1.5 rounded text-xs font-semibold transition-colors bg-obsidian text-white" data-filter="all">
+                            All Work
+                        </button>
+                        <button onclick="filterPortfolio('jobaids')" class="filter-btn px-3.5 py-1.5 rounded text-xs font-semibold transition-colors bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="jobaids">
+                            Job Aids &amp; Editing
+                        </button>
+                        <button onclick="filterPortfolio('dataviz')" class="filter-btn px-3.5 py-1.5 rounded text-xs font-semibold transition-colors bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="dataviz">
+                            Data Viz
+                        </button>
+                        <button onclick="filterPortfolio('webux')" class="filter-btn px-3.5 py-1.5 rounded text-xs font-semibold transition-colors bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="webux">
+                            Web &amp; UX
+                        </button>
+                        <button onclick="filterPortfolio('strategy')" class="filter-btn px-3.5 py-1.5 rounded text-xs font-semibold transition-colors bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="strategy">
+                            Strategy
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Artifact Grid -->
+                <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- Card 1: Firm Intranet Redesign -->
+                    <article onclick="openArtifact('intranet')" class="portfolio-card border border-slate-200 rounded-lg overflow-hidden bg-white hover:border-slate-400 transition-all cursor-pointer hover:-translate-y-1 flex flex-col group" data-category="webux">
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <p class="text-[11px] font-bold uppercase tracking-wider text-pink-600 mb-1">Intranet Redesign</p>
+                                <h3 class="text-base font-bold text-slate-950 group-hover:text-royal-600 transition-colors">Firm Intranet Redesign</h3>
+                                <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
+                                    A legacy intranet rebuilt as a SharePoint hub where 750+ employees across seven offices find resources and stay connected.
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-[11px] font-medium text-royal-600">Information Architecture • SharePoint</span>
+                                <span class="text-xs font-semibold text-slate-900 group-hover:text-royal-600 inline-flex items-center space-x-1">
+                                    <span>View Artifact</span>
+                                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 2: Library Homepage Redesign -->
+                    <article onclick="openArtifact('meridian')" class="portfolio-card border border-slate-200 rounded-lg overflow-hidden bg-white hover:border-slate-400 transition-all cursor-pointer hover:-translate-y-1 flex flex-col group" data-category="webux">
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <p class="text-[11px] font-bold uppercase tracking-wider text-pink-600 mb-1">UX Case Study</p>
+                                <h3 class="text-base font-bold text-slate-950 group-hover:text-royal-600 transition-colors">Library Homepage Redesign</h3>
+                                <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
+                                    Meridian Library District homepage redesign, from patron surveys to usability tests, built for first-time and less web-savvy visitors.
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-[11px] font-medium text-royal-600">UX Research • Figma</span>
+                                <span class="text-xs font-semibold text-slate-900 group-hover:text-royal-600 inline-flex items-center space-x-1">
+                                    <span>View Artifact</span>
+                                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 3: iTimekeep Quick Reference Guides -->
+                    <article onclick="openArtifact('itimekeep')" class="portfolio-card border border-slate-200 rounded-lg overflow-hidden bg-white hover:border-slate-400 transition-all cursor-pointer hover:-translate-y-1 flex flex-col group" data-category="jobaids">
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <p class="text-[11px] font-bold uppercase tracking-wider text-pink-600 mb-1">Job Aid • Instructional Design</p>
+                                <h3 class="text-base font-bold text-slate-950 group-hover:text-royal-600 transition-colors">iTimekeep Quick Reference Guides</h3>
+                                <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
+                                    Just-in-time, task-based guides that helped attorneys and staff record time correctly from day one of a new system rollout.
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-[11px] font-medium text-royal-600">Job Aids • Change Enablement</span>
+                                <span class="text-xs font-semibold text-slate-900 group-hover:text-royal-600 inline-flex items-center space-x-1">
+                                    <span>View Artifact</span>
+                                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 4: Crime & Curiosity in Idaho -->
+                    <article onclick="openArtifact('crime')" class="portfolio-card border border-slate-200 rounded-lg overflow-hidden bg-white hover:border-slate-400 transition-all cursor-pointer hover:-translate-y-1 flex flex-col group" data-category="dataviz">
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <p class="text-[11px] font-bold uppercase tracking-wider text-pink-600 mb-1">Data Visualization</p>
+                                <h3 class="text-base font-bold text-slate-950 group-hover:text-royal-600 transition-colors">Crime &amp; Curiosity in Idaho</h3>
+                                <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
+                                    A scrolling data story testing whether true-crime curiosity follows crime rates, comparing police data and searches across ten Idaho cities.
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-[11px] font-medium text-royal-600">Data Analysis • Infographic</span>
+                                <span class="text-xs font-semibold text-slate-900 group-hover:text-royal-600 inline-flex items-center space-x-1">
+                                    <span>View Artifact</span>
+                                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 5: Apache Junction Communication Plan -->
+                    <article onclick="openArtifact('apache')" class="portfolio-card border border-slate-200 rounded-lg overflow-hidden bg-white hover:border-slate-400 transition-all cursor-pointer hover:-translate-y-1 flex flex-col group" data-category="strategy">
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <p class="text-[11px] font-bold uppercase tracking-wider text-pink-600 mb-1">Communication Strategy</p>
+                                <h3 class="text-base font-bold text-slate-950 group-hover:text-royal-600 transition-colors">Apache Junction Communication Plan</h3>
+                                <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
+                                    A campaign framing water conservation as a shared goal, with messages mapped to six audiences to cut the city's water use by 5%.
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-[11px] font-medium text-royal-600">Stakeholder Analysis • Message Framing</span>
+                                <span class="text-xs font-semibold text-slate-900 group-hover:text-royal-600 inline-flex items-center space-x-1">
+                                    <span>View Artifact</span>
+                                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 6: Leadership Communication Best Practices -->
+                    <article onclick="openArtifact('leadership')" class="portfolio-card border border-slate-200 rounded-lg overflow-hidden bg-white hover:border-slate-400 transition-all cursor-pointer hover:-translate-y-1 flex flex-col group" data-category="strategy">
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <p class="text-[11px] font-bold uppercase tracking-wider text-pink-600 mb-1">Presentation Design</p>
+                                <h3 class="text-base font-bold text-slate-950 group-hover:text-royal-600 transition-colors">Leadership Communication Best Practices</h3>
+                                <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
+                                    A 15-minute talk pairing four leadership behaviors with practical tools to prevent the leading cause of project failure.
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-[11px] font-medium text-royal-600">Visual Storytelling • PowerPoint</span>
+                                <span class="text-xs font-semibold text-slate-900 group-hover:text-royal-600 inline-flex items-center space-x-1">
+                                    <span>View Artifact</span>
+                                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 7: The Pearson Page Collection -->
+                    <article onclick="openArtifact('pearson')" class="portfolio-card border border-slate-200 rounded-lg overflow-hidden bg-white hover:border-slate-400 transition-all cursor-pointer hover:-translate-y-1 flex flex-col group" data-category="webux">
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <p class="text-[11px] font-bold uppercase tracking-wider text-pink-600 mb-1">Web Proposal</p>
+                                <h3 class="text-base font-bold text-slate-950 group-hover:text-royal-600 transition-colors">The Pearson Page Collection</h3>
+                                <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
+                                    A website proposal for a rare book collector, designed to earn a visitor's trust before they ever ask about a book.
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-[11px] font-medium text-royal-600">Web Strategy • Figma</span>
+                                <span class="text-xs font-semibold text-slate-900 group-hover:text-royal-600 inline-flex items-center space-x-1">
+                                    <span>View Artifact</span>
+                                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 8: Visualizing the Self -->
+                    <article onclick="openArtifact('self')" class="portfolio-card border border-slate-200 rounded-lg overflow-hidden bg-white hover:border-slate-400 transition-all cursor-pointer hover:-translate-y-1 flex flex-col group" data-category="dataviz">
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <p class="text-[11px] font-bold uppercase tracking-wider text-pink-600 mb-1">Data Visualization</p>
+                                <h3 class="text-base font-bold text-slate-950 group-hover:text-royal-600 transition-colors">Visualizing the Self</h3>
+                                <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
+                                    A one-page infographic turning five weeks of my own step, sleep, and exercise data into a story about my weekly rhythm.
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-[11px] font-medium text-royal-600">Data Storytelling • Information Design</span>
+                                <span class="text-xs font-semibold text-slate-900 group-hover:text-royal-600 inline-flex items-center space-x-1">
+                                    <span>View Artifact</span>
+                                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT ME SECTION -->
+        <section id="about" class="bg-slate-50 py-20">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    
+                    <!-- Bio Narrative -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-widest text-pink-600 mb-2">Background</p>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">
+                                A Curious Mind. A People-First Perspective.
+                            </h2>
+                        </div>
+
+                        <div class="space-y-4 text-sm text-slate-600 leading-relaxed">
+                            <p>
+                                I’ve always wanted to understand how things work, why they work that way, and how they could work better. That curiosity took me from recruiting to software training to leading technology projects and AI initiatives, and it still shapes how I approach every challenge.
+                            </p>
+                            <p>
+                                I enjoy connecting dots and making complicated things feel approachable, whether that’s a quick reference guide for a busy attorney or a training program for hundreds of employees. My background encompasses leading large-scale M365 and SharePoint migrations, authoring user adoption documentation, and applying rhetorical frameworks to technological workflows.
+                            </p>
+                            <p>
+                                Outside of work, family, faith, and community are at the center of my life. You’ll find me mountain biking, snowboarding, working out, cooking, reading, or chasing the next thing I want to learn.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Competencies & Tools List -->
+                    <div class="lg:col-span-5">
+                        <div class="bg-white border border-slate-200 rounded-lg p-6 space-y-6">
+                            <h3 class="text-sm font-extrabold uppercase tracking-wider text-slate-950">Core Competencies &amp; Tools</h3>
+                            
+                            <div class="space-y-4 text-xs">
+                                <div>
+                                    <p class="font-bold text-slate-900 mb-1.5">Technical Communication &amp; UX</p>
+                                    <p class="text-slate-600 leading-relaxed">Technical Editing • User Personas • Usability &amp; First-Click Testing • Card Sorting • Quick Reference Guides</p>
+                                </div>
+
+                                <div class="pt-3 border-t border-slate-100">
+                                    <p class="font-bold text-slate-900 mb-1.5">Information &amp; Visual Design</p>
+                                    <p class="text-slate-600 leading-relaxed">Data Visualization • Applied Visual Rhetoric • Style Guides • Infographics</p>
+                                </div>
+
+                                <div class="pt-3 border-t border-slate-100">
+                                    <p class="font-bold text-slate-900 mb-1.5">Platform Enablement &amp; Software</p>
+                                    <p class="text-slate-600 leading-relaxed">SharePoint Online • Microsoft 365 • Figma • Canva • Snagit &amp; Camtasia</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="py-20 bg-obsidian border-t border-slate-800 text-slate-100 relative overflow-hidden">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b25_1px,transparent_1px),linear-gradient(to_bottom,#1e293b25_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] pointer-events-none"></div>
+
+            <div class="max-w-5xl mx-auto px-6 relative grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Column: Copy & Messaging -->
+                <div class="lg:col-span-6 space-y-5">
+                    <p class="text-xs font-bold uppercase tracking-widest text-pink-600">
+                        Get In Touch
+                    </p>
+                    
+                    <h2 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">
+                        Let's Discuss Enablement &amp; Technical Communication
+                    </h2>
+                    
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Interested in collaborating on enterprise software adoption, visual information design, or user experience documentation? Reach out directly via email or connect with me on LinkedIn.
+                    </p>
+
+                    <div class="pt-1 flex items-center space-x-2 text-slate-400 text-xs font-medium">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-blue-400"></i>
+                        <span>Boise Region &amp; Remote</span>
+                    </div>
+                </div>
+
+                <!-- Right Column: Interactive Direct Connect Cards -->
+                <div class="lg:col-span-6 space-y-4">
+                    
+                   <!-- Email Card -->
+                    <a href="mailto:heathergurden@gmail.com" class="group flex items-center justify-between p-5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/60 hover:bg-slate-800/90 transition-all shadow-lg">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-11 h-11 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all">
+                                <i data-lucide="mail" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Direct Email</div>
+                                <div class="font-display text-sm sm:text-base font-bold text-white group-hover:text-blue-300 transition-colors">heathergurden@gmail.com</div>
+                            </div>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+                    </a>
+
+                    <!-- LinkedIn Card -->
+                    <a href="https://www.linkedin.com/in/heather-gurden-pmp-90231424/" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between p-5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/60 hover:bg-slate-800/90 transition-all shadow-lg">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-11 h-11 rounded-lg bg-blue-600/20 flex items-center justify-center overflow-hidden p-2 group-hover:bg-blue-600/30 transition-all">
+                                <img src="https://drive.google.com/thumbnail?id=1ycsml_TNc6mOoBXnBOgguvIgJLob50la&sz=w500" alt="LinkedIn Logo" class="w-full h-full object-contain" />
+                            </div>
+                            <div>
+                                <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">LinkedIn Profile</div>
+                                <div class="font-display text-sm sm:text-base font-bold text-white group-hover:text-blue-300 transition-colors">Connect on LinkedIn</div>
+                            </div>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Minimalist Dark Obsidian Footer -->
+    <footer class="bg-obsidian border-t border-slate-800/80 text-slate-400 py-8 text-xs">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 Heather Gurden</p>
+            <div class="flex items-center space-x-6">
+                <a href="#home" class="text-blue-400 hover:text-blue-300 font-medium transition-colors">↑ Back to Top</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Mobile Menu Toggle & Auto-Close
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+        }
+
+        // Portfolio Filtering
+        function filterPortfolio(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                if (btn.dataset.filter === category) {
+                    btn.classList.remove('bg-slate-100', 'text-slate-700');
+                    btn.classList.add('bg-obsidian', 'text-white');
+                } else {
+                    btn.classList.remove('bg-obsidian', 'text-white');
+                    btn.classList.add('bg-slate-100', 'text-slate-700');
+                }
+            });
+
+            const cards = document.querySelectorAll('.portfolio-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Artifact Link Database (Update URLs to your specific Google Site pages/artifacts)
+        const projectData = {
+            meridian: 'https://sites.google.com/view/heathergurden/home/library-website-redesign',
+            itimekeep: 'https://sites.google.com/view/heathergurden/', 
+            crime: 'https://sites.google.com/view/heathergurden/'      
+        };
+
+        // Opens the artifact page cleanly in a new tab
+        function openArtifact(id) {
+            const url = projectData[id] || projectData.meridian;
+            window.open(url, '_blank');
+        }
+
+
+</script>
+</body>
+</html>
