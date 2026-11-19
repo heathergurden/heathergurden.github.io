@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Presentation design case study: a 15-minute talk that pairs four leadership behaviors with practical communication tools for integrated project teams.">
+    <title>Best Practices for Leadership Communication | Heather Gurden</title>
+    <!-- CSS -->
+    <link href="./output.css" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #111827;
+            background-color: #FFFFFF;
+        }
+        h1, h2, h3, .font-display {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        /* Minimalist scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F8FAFC; }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+        /* Page-specific layout helpers (not in output.css yet) */
+        .stats-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+        @media (min-width: 40rem) {
+            .stats-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+
+        /* ===== Slide deck carousel ===== */
+        .deck {
+            position: relative;
+            border: 1px solid #E2E8F0;
+            border-radius: 0.75rem;
+            background: #FFFFFF;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -12px rgba(15, 23, 42, 0.18);
+        }
+        .deck:focus-visible {
+            outline: 2px solid #2563EB;
+            outline-offset: 3px;
+        }
+        .deck-viewport {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: #F1F5F9;
+            touch-action: pan-y;
+        }
+        .deck-track {
+            display: flex;
+            height: 100%;
+            transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform;
+        }
+        .deck-slide {
+            position: relative;
+            flex: 0 0 100%;
+            height: 100%;
+        }
+        /* Placeholder label shows until the slide image loads */
+        .deck-slide::before {
+            content: attr(data-label);
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 0.875rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #94A3B8;
+        }
+        .deck-slide img {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .deck-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2.75rem;
+            height: 2.75rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid #E2E8F0;
+            color: #0F172A;
+            box-shadow: 0 4px 12px -4px rgba(15, 23, 42, 0.25);
+            cursor: pointer;
+            transition: background-color 150ms, color 150ms, opacity 150ms;
+            z-index: 2;
+        }
+        .deck-btn:hover { background: #2563EB; color: #FFFFFF; border-color: #2563EB; }
+        .deck-btn:focus-visible { outline: 2px solid #2563EB; outline-offset: 2px; }
+        .deck-btn[disabled] { opacity: 0; pointer-events: none; }
+        .deck-btn.prev { left: 0.875rem; }
+        .deck-btn.next { right: 0.875rem; }
+        .deck-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.875rem 1.25rem;
+            border-top: 1px solid #F1F5F9;
+        }
+        .deck-counter {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #475569;
+            font-variant-numeric: tabular-nums;
+            min-width: 3.5rem;
+        }
+        .deck-dots {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.375rem;
+        }
+        .deck-dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 9999px;
+            background: #CBD5E1;
+            border: 0;
+            padding: 0;
+            cursor: pointer;
+            transition: width 200ms, background-color 200ms;
+        }
+        .deck-dot:hover { background: #94A3B8; }
+        .deck-dot[aria-current="true"] { width: 1.5rem; background: #2563EB; }
+        .deck-dot:focus-visible { outline: 2px solid #2563EB; outline-offset: 2px; }
+        .deck-full {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #2563EB;
+            min-width: 3.5rem;
+            justify-content: flex-end;
+            white-space: nowrap;
+        }
+        .deck-full:hover { color: #1D4ED8; }
+        @media (max-width: 30rem) {
+            .deck-btn { width: 2.25rem; height: 2.25rem; }
+            .deck-full span { display: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .deck-track { transition: none; }
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-900 antialiased selection:bg-royal-600 selection:text-white relative">
+
+    <!-- Global Sticky Navigation Header -->
+    <header class="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-sm border-b border-slate-200 transition-all">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html#home" class="group flex items-center space-x-2.5">
+                    <div class="w-8 h-8 rounded bg-obsidian flex items-center justify-center text-white font-display font-bold text-sm group-hover:bg-royal-600 transition-colors">
+                        HG
+                    </div>
+                    <span class="font-display font-bold text-base text-slate-900 tracking-tight group-hover:text-royal-600 transition-colors">
+                        Heather Gurden
+                    </span>
+                </a>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <nav class="flex items-center space-x-7 text-sm font-medium text-slate-600">
+                        <a href="index.html#home" class="hover:text-royal-600 transition-colors">Home</a>
+                        <a href="index.html#portfolio" class="hover:text-royal-600 transition-colors">My Work</a>
+                        <a href="index.html#about" class="hover:text-royal-600 transition-colors">About Me</a>
+                        <a href="index.html#contact" class="hover:text-royal-600 transition-colors">Contact</a>
+                    </nav>
+                    <a href="images/hg_resume.pdf"
+                       target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded bg-royal-600 text-white hover:bg-royal-700 transition-colors">
+                        <span>Resume</span>
+                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <div class="flex md:hidden">
+                    <button id="mobile-menu-btn" type="button" aria-label="Open menu" class="p-2 rounded text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 bg-white px-6 pt-2 pb-5 space-y-3">
+            <a href="index.html#home" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">Home</a>
+            <a href="index.html#portfolio" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">My Work</a>
+            <a href="index.html#about" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">About Me</a>
+            <a href="index.html#contact" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">Contact</a>
+            <div class="pt-2 border-t border-slate-100">
+                <a href="images/hg_resume.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center space-x-1.5 w-full py-2.5 text-xs font-semibold rounded bg-royal-600 text-white">
+                    <span>Download Resume</span>
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main id="top">
+
+        <!-- PROJECT HEADER + DECK -->
+        <section class="bg-slate-50 border-b border-slate-200 pt-14 pb-20">
+            <div class="max-w-5xl mx-auto px-6 space-y-6">
+
+                <!-- Breadcrumb -->
+                <nav aria-label="Breadcrumb" class="flex items-center space-x-1.5 text-xs font-medium text-slate-500">
+                    <a href="index.html#portfolio" class="hover:text-royal-600 transition-colors">My Work</a>
+                    <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                    <span class="text-slate-900">Leadership Communication</span>
+                </nav>
+
+                <div class="space-y-4">
+                    <p class="text-xs font-bold uppercase tracking-widest text-pink-600">Presentation Design</p>
+                    <h1 class="text-4xl font-extrabold tracking-tight text-slate-950 leading-tight">
+                        Best Practices for Leadership Communication
+                    </h1>
+                    <p class="text-base text-slate-600 leading-relaxed max-w-xl">
+                        A 15-minute presentation for an integrated project team that pairs four foundational leadership behaviors with practical communication tools to prevent the leading cause of project failure.
+                    </p>
+                    <p class="text-[11px] font-medium text-royal-600">
+                        Presentation Design • Leadership Communication • Change Communication • Visual Storytelling
+                    </p>
+                </div>
+
+                <!-- Slide Deck Carousel -->
+                <div class="flex items-center justify-between gap-4" style="padding-top: 1.5rem;">
+                    <p class="text-xs text-slate-500"></p>
+                    <a href="images\leadership\leadcommdeck.pdf" target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center space-x-1.5 px-4 py-2.5 text-xs font-semibold rounded bg-royal-600 text-white hover:bg-royal-700 transition-colors">
+                        <span>View Slide Deck (PDF)</span>
+                    </a>
+                </div>
+
+                <div class="deck" id="deck" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Best Practices for Leadership Communication slide deck">
+                    <div class="deck-viewport">
+                        <div class="deck-track" id="deck-track" aria-live="polite">
+                            <div class="deck-slide" data-label="Slide 1" role="group" aria-roledescription="slide">
+                                <img src="images/leadership/leadcommslide_1.webp" alt="Title slide: Best Practices for Leadership Communication" loading="eager">
+                            </div>
+                            <div class="deck-slide" data-label="Slide 2" role="group" aria-roledescription="slide">
+                                <img src="images/leadership/leadcommslide_2.webp" alt="Slide 2" loading="lazy">
+                            </div>
+                            <div class="deck-slide" data-label="Slide 3" role="group" aria-roledescription="slide">
+                                <img src="images/leadership/leadcommslide_3.webp" alt="Slide 3" loading="lazy">
+                            </div>
+                            <div class="deck-slide" data-label="Slide 4" role="group" aria-roledescription="slide">
+                                <img src="images/leadership/leadcommslide_4.webp" alt="Slide 4" loading="lazy">
+                            </div>
+                            <div class="deck-slide" data-label="Slide 5" role="group" aria-roledescription="slide">
+                                <img src="images/leadership/leadcommslide_5.webp" alt="Slide 5" loading="lazy">
+                            </div>
+                            <div class="deck-slide" data-label="Slide 6" role="group" aria-roledescription="slide">
+                                <img src="images/leadership/leadcommslide_6.webp" alt="Slide 6" loading="lazy">
+                            </div>
+                            <div class="deck-slide" data-label="Slide 7" role="group" aria-roledescription="slide">
+                                <img src="images/leadership/leadcommslide_7.webp" alt="Slide 7" loading="lazy">
+                            </div>
+                            <div class="deck-slide" data-label="Slide 8" role="group" aria-roledescription="slide">
+                                <img src="images/leadership/leadcommslide_8.webp" alt="Slide 8" loading="lazy">
+                            </div>
+                            <div class="deck-slide" data-label="Slide 9" role="group" aria-roledescription="slide">
+                                <img src="images/leadership/leadcommslide_9.webp" alt="Slide 9" loading="lazy">
+                            </div>
+                            <div class="deck-slide" data-label="Slide 10" role="group" aria-roledescription="slide">
+                                <img src="images/leadership/leadcommslide_10.webp" alt="Slide 10" loading="lazy">
+                            </div>
+                                                        <div class="deck-slide" data-label="Slide 1" role="group" aria-roledescription="slide">
+                                <img src="images/leadership/leadcommslide_11.webp" alt="Title slide: Best Practices for Leadership Communication" loading="eager">
+                            </div>
+                            <div class="deck-slide" data-label="Slide 1" role="group" aria-roledescription="slide">
+                                <img src="images/leadership/leadcommslide_12.webp" alt="Title slide: Best Practices for Leadership Communication" loading="eager">
+                            </div>
+                            <div class="deck-slide" data-label="Slide 1" role="group" aria-roledescription="slide">
+                                <img src="images/leadership/leadcommslide_13.webp" alt="Title slide: Best Practices for Leadership Communication" loading="eager">
+                            </div>
+                            <div class="deck-slide" data-label="Slide 1" role="group" aria-roledescription="slide">
+                                <img src="images/leadership/leadcommslide_14.webp" alt="Title slide: Best Practices for Leadership Communication" loading="eager">
+                            </div>
+
+                        </div>
+
+                        <button type="button" class="deck-btn prev" id="deck-prev" aria-label="Previous slide">
+                            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                        </button>
+                        <button type="button" class="deck-btn next" id="deck-next" aria-label="Next slide">
+                            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+
+                    <div class="deck-bar">
+                        <p class="deck-counter" id="deck-counter">1 / 10</p>
+                        <div class="deck-dots" id="deck-dots" aria-label="Choose a slide"></div>
+                        <a class="deck-full" id="deck-full" href="images/leadership/leadcommslide_1.webp" target="_blank" rel="noopener noreferrer">
+                            <span>Full size</span>
+                            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- AT A GLANCE -->
+        <section class="bg-obsidian text-white py-20">
+            <div class="max-w-5xl mx-auto px-6">
+                <h2 class="text-2xl font-extrabold tracking-tight text-white mb-10">At a Glance</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div class="space-y-2">
+                        <p class="text-[11px] font-bold uppercase tracking-wider text-blue-400">Problem</p>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            Poor communication is the leading cause of project failure, and integrated project teams bring together people from different departments and levels of authority.
+                        </p>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-[11px] font-bold uppercase tracking-wider text-blue-400">Approach</p>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            I designed a presentation that pairs four leadership behaviors (respect, listening first, clear expectations, and accountability) with the tools teams use to keep information flowing.
+                        </p>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-[11px] font-bold uppercase tracking-wider text-blue-400">Result</p>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            A deck with full speaker notes that reframes project success as a communication problem and closes with four takeaways the team can act on.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Metrics Row -->
+                <div class="stats-grid-3 pt-6 border-t border-slate-800" style="margin-top: 3rem;">
+                    <div>
+                        <p class="font-display text-2xl sm:text-3xl font-extrabold text-white">15 min</p>
+                        <p class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold mt-0.5">Presentation length</p>
+                    </div>
+                    <div>
+                        <p class="font-display text-2xl sm:text-3xl font-extrabold text-white">4</p>
+                        <p class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold mt-0.5">Leadership behaviors</p>
+                    </div>
+                    <div>
+                        <p class="font-display text-2xl sm:text-3xl font-extrabold text-white">1</p>
+                        <p class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold mt-0.5">Team toolkit</p>
+                    </div>
+                </div>
+
+                <!-- Tools Row -->
+                <div class="pt-6 border-t border-slate-800 flex flex-col sm:flex-row gap-4" style="margin-top: 3rem;">
+                    <p class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold pt-2" style="min-width: 5rem;">Tools Used</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded text-xs font-semibold bg-slate-900/90 border border-slate-700/80 text-slate-200">
+                            <i data-lucide="presentation" class="w-3.5 h-3.5 text-blue-400"></i><span>Microsoft PowerPoint</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KEY DECISIONS -->
+        <section class="bg-white py-20 border-b border-slate-200">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="mb-10">
+                    <p class="text-xs font-bold uppercase tracking-widest text-pink-600 mb-2">Design Rationale</p>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">Key Decisions</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <article class="border border-slate-200 rounded-lg bg-white p-6 space-y-3 transition-all hover:border-slate-400 hover:-translate-y-1 group">
+                        <p class="font-display text-2xl font-extrabold text-royal-600">01</p>
+                        <h3 class="text-base font-bold text-slate-950 leading-snug group-hover:text-royal-600 transition-colors">Opening with the stakes</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            I started with a blunt hook, “Your project failed,” and a PMI statistic so the audience understood the cost before hearing any advice. I framed each behavior as a tool for anyone, “whether you are of formal or informal authority,” so the message landed at every level.
+                        </p>
+                    </article>
+
+                    <article class="border border-slate-200 rounded-lg bg-white p-6 space-y-3 transition-all hover:border-slate-400 hover:-translate-y-1 group">
+                        <p class="font-display text-2xl font-extrabold text-royal-600">02</p>
+                        <h3 class="text-base font-bold text-slate-950 leading-snug group-hover:text-royal-600 transition-colors">Treating technology as support, not the solution</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Many teams expect a new tool to fix a struggling project. The deck argues that results depend on how people communicate, then maps a team toolkit and recommends choosing tools by team needs and project complexity.
+                        </p>
+                    </article>
+
+                    <article class="border border-slate-200 rounded-lg bg-white p-6 space-y-3 transition-all hover:border-slate-400 hover:-translate-y-1 group">
+                        <p class="font-display text-2xl font-extrabold text-royal-600">03</p>
+                        <h3 class="text-base font-bold text-slate-950 leading-snug group-hover:text-royal-600 transition-colors">Letting the speaker carry the detail</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Each slide holds one behavior in short action phrases, supported by visual metaphors like a seedling for communication and a Newton’s cradle for momentum. The speaker notes carry the full argument, so the audience listens instead of reading ahead.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEXT PROJECT BAND -->
+        <section class="py-20 bg-obsidian text-slate-100 relative overflow-hidden">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b25_1px,transparent_1px),linear-gradient(to_bottom,#1e293b25_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] pointer-events-none"></div>
+
+            <div class="max-w-5xl mx-auto px-6 relative grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-5">
+                    <p class="text-xs font-bold uppercase tracking-widest text-pink-600">Keep Exploring</p>
+                    <h2 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">
+                        See More Selected Work
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Browse job aids, data stories, and communication strategy projects, or get in touch to talk about your next adoption challenge.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-6 space-y-4">
+                    <!-- Next Project Card (TODO: confirm filename and title of the next project) -->
+                    <a href="library-redesign.html" class="group flex items-center justify-between p-5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/60 hover:bg-slate-800/90 transition-all shadow-lg">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-11 h-11 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all">
+                                <i data-lucide="layout-template" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Next Project</div>
+                                <div class="font-display text-sm sm:text-base font-bold text-white group-hover:text-blue-300 transition-colors">Library Homepage Redesign</div>
+                            </div>
+                        </div>
+                        <i data-lucide="arrow-right" class="w-4 h-4 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all"></i>
+                    </a>
+
+                    <!-- Back to Portfolio Card -->
+                    <a href="index.html#portfolio" class="group flex items-center justify-between p-5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/60 hover:bg-slate-800/90 transition-all shadow-lg">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-11 h-11 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all">
+                                <i data-lucide="layout-grid" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Portfolio</div>
+                                <div class="font-display text-sm sm:text-base font-bold text-white group-hover:text-blue-300 transition-colors">Back to Portfolio</div>
+                            </div>
+                        </div>
+                        <i data-lucide="arrow-left" class="w-4 h-4 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer (same as index) -->
+    <footer class="bg-obsidian border-t border-slate-800/80 text-slate-400 py-8 text-xs">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 Heather Gurden</p>
+            <div class="flex items-center space-x-6">
+                <a href="#top" class="text-blue-400 hover:text-blue-300 font-medium transition-colors">↑ Back to Top</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Mobile Menu Toggle & Auto-Close
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Slide Deck Carousel
+        (function () {
+            const deck = document.getElementById('deck');
+            const track = document.getElementById('deck-track');
+            const slides = Array.from(track.querySelectorAll('.deck-slide'));
+            const prevBtn = document.getElementById('deck-prev');
+            const nextBtn = document.getElementById('deck-next');
+            const dotsWrap = document.getElementById('deck-dots');
+            const counter = document.getElementById('deck-counter');
+            const fullLink = document.getElementById('deck-full');
+            const total = slides.length;
+            let index = 0;
+
+            // Build dots
+            const dots = slides.map((slide, i) => {
+                slide.setAttribute('aria-label', `${i + 1} of ${total}`);
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'deck-dot';
+                dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+                dot.addEventListener('click', () => goTo(i));
+                dotsWrap.appendChild(dot);
+                return dot;
+            });
+
+            function goTo(i) {
+                index = Math.max(0, Math.min(total - 1, i));
+                track.style.transform = `translateX(-${index * 100}%)`;
+                slides.forEach((s, n) => s.setAttribute('aria-hidden', n === index ? 'false' : 'true'));
+                dots.forEach((d, n) => d.setAttribute('aria-current', n === index ? 'true' : 'false'));
+                counter.textContent = `${index + 1} / ${total}`;
+                prevBtn.disabled = index === 0;
+                nextBtn.disabled = index === total - 1;
+                const img = slides[index].querySelector('img');
+                if (img) fullLink.href = img.dataset.full || img.getAttribute('src');
+            }
+
+            prevBtn.addEventListener('click', () => goTo(index - 1));
+            nextBtn.addEventListener('click', () => goTo(index + 1));
+
+            // Keyboard: arrows, Home, End when the deck has focus
+            deck.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(index - 1); }
+                else if (e.key === 'ArrowRight') { e.preventDefault(); goTo(index + 1); }
+                else if (e.key === 'Home') { e.preventDefault(); goTo(0); }
+                else if (e.key === 'End') { e.preventDefault(); goTo(total - 1); }
+            });
+
+            // Swipe on touch devices
+            let startX = null;
+            const viewport = deck.querySelector('.deck-viewport');
+            viewport.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+            viewport.addEventListener('touchend', (e) => {
+                if (startX === null) return;
+                const dx = e.changedTouches[0].clientX - startX;
+                if (Math.abs(dx) > 40) goTo(index + (dx < 0 ? 1 : -1));
+                startX = null;
+            });
+
+            goTo(0);
+        })();
+    </script>
+</body>
+</html>

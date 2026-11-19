@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Data storytelling case study: a one-page infographic that turns five weeks of personal step, sleep, and exercise data into a story about how the rhythm of a week shapes movement and rest.">
+    <title>Visualizing the Self | Heather Gurden</title>
+    <!-- CSS -->
+    <link href="./output.css" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #111827;
+            background-color: #FFFFFF;
+        }
+        h1, h2, h3, .font-display {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        /* Minimalist scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F8FAFC; }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+        /* Page-specific layout helpers (not in output.css yet) */
+        .stats-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+        @media (min-width: 40rem) {
+            .stats-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+
+        /* ===== Infographic viewer ===== */
+        .ig {
+            display: grid;
+            grid-template-columns: 1fr;
+            border: 1px solid #E2E8F0;
+            border-radius: 0.75rem;
+            background: #FFFFFF;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -12px rgba(15, 23, 42, 0.18);
+        }
+        @media (min-width: 48rem) {
+            .ig { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
+        }
+
+        /* Left: the "desk" the poster sits on */
+        .ig-stage {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 2.5rem 2rem;
+            background: #F1F5F9;
+            background-image: radial-gradient(#E2E8F0 1px, transparent 1px);
+            background-size: 16px 16px;
+        }
+        .ig-frame {
+            position: relative;
+            width: 100%;
+            max-width: 25rem;
+            aspect-ratio: 1200 / 2134;
+            background: #FFFFFF;
+            border-radius: 0.25rem;
+            box-shadow:
+                0 1px 2px rgba(15, 23, 42, 0.06),
+                0 12px 28px -10px rgba(15, 23, 42, 0.28);
+            overflow: hidden;
+            scroll-margin-top: 5rem;
+        }
+        .ig-frame img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* Section highlight: dims everything outside the active region */
+        .ig-spot {
+            position: absolute;
+            left: 0;
+            right: 0;
+            border-radius: 0.25rem;
+            opacity: 0;
+            pointer-events: none;
+            box-shadow: 0 0 0 9999px rgba(15, 23, 42, 0.55), inset 0 0 0 3px #2563EB;
+            transition: top 280ms ease, height 280ms ease, opacity 200ms ease;
+        }
+        .ig-frame.has-focus .ig-spot { opacity: 1; }
+
+        /* Right: section guide */
+        .ig-guide {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid #F1F5F9;
+        }
+        @media (min-width: 48rem) {
+            .ig-guide { border-top: 0; border-left: 1px solid #F1F5F9; }
+        }
+        .ig-guide-head { padding: 1.25rem 1.5rem 0.75rem; }
+        .ig-list {
+            list-style: none;
+            margin: 0;
+            padding: 0 0.75rem 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        .ig-item {
+            width: 100%;
+            text-align: left;
+            display: flex;
+            gap: 0.875rem;
+            padding: 0.875rem 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid transparent;
+            background: transparent;
+            cursor: pointer;
+            transition: background-color 150ms, border-color 150ms;
+        }
+        .ig-item:hover { background: #F8FAFC; }
+        .ig-item:focus-visible { outline: 2px solid #2563EB; outline-offset: 1px; }
+        .ig-item[aria-pressed="true"] {
+            background: #EFF6FF;
+            border-color: #BFDBFE;
+        }
+        .ig-item-num {
+            flex: 0 0 auto;
+            width: 1.75rem;
+            height: 1.75rem;
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 800;
+            background: #F1F5F9;
+            color: #475569;
+            transition: background-color 150ms, color 150ms;
+        }
+        .ig-item[aria-pressed="true"] .ig-item-num {
+            background: #2563EB;
+            color: #FFFFFF;
+        }
+        .ig-item-title {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #0F172A;
+            line-height: 1.3;
+        }
+        .ig-item-desc {
+            display: block;
+            margin-top: 0.25rem;
+            font-size: 0.75rem;
+            color: #64748B;
+            line-height: 1.5;
+        }
+
+        /* Color key matches the infographic's palette */
+        .ig-key {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+            padding: 0 1.5rem 1.25rem;
+            font-size: 0.75rem;
+            color: #475569;
+        }
+        .ig-key span { display: inline-flex; align-items: center; gap: 0.375rem; }
+        .ig-key i { width: 0.625rem; height: 0.625rem; border-radius: 2px; display: inline-block; }
+
+        .ig-bar {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.875rem 1.5rem;
+            border-top: 1px solid #F1F5F9;
+        }
+        .ig-reset {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #475569;
+            background: none;
+            border: 0;
+            padding: 0;
+            cursor: pointer;
+        }
+        .ig-reset:hover { color: #0F172A; }
+        .ig-reset[disabled] { opacity: 0.4; cursor: default; }
+        .ig-full {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #2563EB;
+            white-space: nowrap;
+        }
+        .ig-full:hover { color: #1D4ED8; }
+
+        /* Text version of the data */
+        .ig-text summary {
+            cursor: pointer;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: #2563EB;
+            list-style: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+        .ig-text summary::-webkit-details-marker { display: none; }
+        .ig-text[open] summary .chev { transform: rotate(90deg); }
+        .ig-text summary .chev { transition: transform 150ms; }
+        .ig-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8125rem;
+            font-variant-numeric: tabular-nums;
+        }
+        .ig-table th, .ig-table td {
+            padding: 0.5rem 0.75rem;
+            text-align: right;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        .ig-table th:first-child, .ig-table td:first-child { text-align: left; }
+        .ig-table thead th {
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #64748B;
+        }
+        .ig-table .hi { color: #15803D; font-weight: 600; }
+        .ig-table .lo { color: #B91C1C; font-weight: 600; }
+
+        @media (max-width: 30rem) {
+            .ig-stage { padding: 1.5rem 1rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .ig-spot { transition: none; }
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-900 antialiased selection:bg-royal-600 selection:text-white relative">
+
+    <!-- Global Sticky Navigation Header -->
+    <header class="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-sm border-b border-slate-200 transition-all">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html#home" class="group flex items-center space-x-2.5">
+                    <div class="w-8 h-8 rounded bg-obsidian flex items-center justify-center text-white font-display font-bold text-sm group-hover:bg-royal-600 transition-colors">
+                        HG
+                    </div>
+                    <span class="font-display font-bold text-base text-slate-900 tracking-tight group-hover:text-royal-600 transition-colors">
+                        Heather Gurden
+                    </span>
+                </a>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <nav class="flex items-center space-x-7 text-sm font-medium text-slate-600">
+                        <a href="index.html#home" class="hover:text-royal-600 transition-colors">Home</a>
+                        <a href="index.html#portfolio" class="hover:text-royal-600 transition-colors">My Work</a>
+                        <a href="index.html#about" class="hover:text-royal-600 transition-colors">About Me</a>
+                        <a href="index.html#contact" class="hover:text-royal-600 transition-colors">Contact</a>
+                    </nav>
+                    <a href="images/hg_resume.pdf"
+                       target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded bg-royal-600 text-white hover:bg-royal-700 transition-colors">
+                        <span>Resume</span>
+                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <div class="flex md:hidden">
+                    <button id="mobile-menu-btn" type="button" aria-label="Open menu" class="p-2 rounded text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 bg-white px-6 pt-2 pb-5 space-y-3">
+            <a href="index.html#home" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">Home</a>
+            <a href="index.html#portfolio" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">My Work</a>
+            <a href="index.html#about" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">About Me</a>
+            <a href="index.html#contact" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">Contact</a>
+            <div class="pt-2 border-t border-slate-100">
+                <a href="images/hg_resume.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center space-x-1.5 w-full py-2.5 text-xs font-semibold rounded bg-royal-600 text-white">
+                    <span>Download Resume</span>
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main id="top">
+
+        <!-- PROJECT HEADER + INFOGRAPHIC VIEWER -->
+        <section class="bg-slate-50 border-b border-slate-200 pt-14 pb-20">
+            <div class="max-w-5xl mx-auto px-6 space-y-6">
+
+                <!-- Breadcrumb -->
+                <nav aria-label="Breadcrumb" class="flex items-center space-x-1.5 text-xs font-medium text-slate-500">
+                    <a href="index.html#portfolio" class="hover:text-royal-600 transition-colors">My Work</a>
+                    <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                    <span class="text-slate-900">Visualizing the Self</span>
+                </nav>
+
+                <div class="space-y-4">
+                    <p class="text-xs font-bold uppercase tracking-widest text-pink-600">Data Visualization</p>
+                    <h1 class="text-4xl font-extrabold tracking-tight text-slate-950 leading-tight">
+                        Visualizing the Self
+                    </h1>
+                    <p class="text-base text-slate-600 leading-relaxed max-w-xl">
+                        A one-page infographic that turns five weeks of my own step, sleep, and exercise data into a story about how the rhythm of my week shapes how I move and rest.
+                    </p>
+                    <p class="text-[11px] font-medium text-royal-600">
+                        Data Visualization • Data Storytelling • Information Design
+                    </p>
+                </div>
+
+                <div class="flex items-center justify-between gap-4" style="padding-top: 1.5rem;">
+                    <p class="text-xs text-slate-500">Select a section to highlight it on the infographic.</p>
+                    <a href="images/visualizing-self/visualizing-self.pdf" target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center space-x-1.5 px-4 py-2.5 text-xs font-semibold rounded bg-royal-600 text-white hover:bg-royal-700 transition-colors whitespace-nowrap">
+                        <span>View Infographic (PDF)</span>
+                    </a>
+                </div>
+
+                <!-- Infographic Viewer -->
+                <div class="ig" role="region" aria-label="Visualizing the Self infographic">
+                    <div class="ig-stage">
+                        <div class="ig-frame" id="ig-frame">
+                            <img src="images/visualizing-self/infographic.webp"
+                                 width="1200" height="2134" loading="eager"
+                                 alt="Infographic titled Heather's Last 5 Weeks: Steps, Exercise, and Sleep. Three donut charts show daily averages by weekday, annotated callouts explain the patterns, a combo chart shows weekly trends, and a closing panel highlights the best day, October 15, 2025. A text version of the data follows below.">
+                            <div class="ig-spot" id="ig-spot" aria-hidden="true"></div>
+                        </div>
+                    </div>
+
+                    <div class="ig-guide">
+                        <div class="ig-guide-head">
+                            <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Reading the Infographic</p>
+                        </div>
+                        <ol class="ig-list" id="ig-list">
+                            <li>
+                                <button type="button" class="ig-item" aria-pressed="false" data-top="9.8" data-height="27.8">
+                                    <span class="ig-item-num">1</span>
+                                    <span>
+                                        <span class="ig-item-title">Daily Average Distribution</span>
+                                        <span class="ig-item-desc">Three donut charts show average steps, sleep score, and exercise minutes for each weekday, with the high and low day pulled out in green and red.</span>
+                                    </span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="ig-item" aria-pressed="false" data-top="37.6" data-height="15.2">
+                                    <span class="ig-item-num">2</span>
+                                    <span>
+                                        <span class="ig-item-title">What Was Happening</span>
+                                        <span class="ig-item-desc">Color-matched callouts connect the numbers to real life, including the inverse relationship between busy Thursdays and Friday's sleep rebound.</span>
+                                    </span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="ig-item" aria-pressed="false" data-top="53.6" data-height="26.4">
+                                    <span class="ig-item-num">3</span>
+                                    <span>
+                                        <span class="ig-item-title">Weekly Average Trend</span>
+                                        <span class="ig-item-desc">A combo chart tracks all three measures across the five weeks, showing steps climbing while exercise minutes dipped.</span>
+                                    </span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="ig-item" aria-pressed="false" data-top="80.4" data-height="17.6">
+                                    <span class="ig-item-num">4</span>
+                                    <span>
+                                        <span class="ig-item-title">My Best Day</span>
+                                        <span class="ig-item-desc">The story ends on one day that put it all together: an evening walk with a friend, nearly double the average steps, and an above-average sleep score.</span>
+                                    </span>
+                                </button>
+                            </li>
+                        </ol>
+                        <div class="ig-key" aria-label="Color key">
+                            <span><i style="background:#1F5C99"></i>Steps</span>
+                            <span><i style="background:#7A2A7E"></i>Sleep</span>
+                            <span><i style="background:#ED7D31"></i>Exercise</span>
+                            <span><i style="background:#16A34A"></i>High</span>
+                            <span><i style="background:#C00000"></i>Low</span>
+                        </div>
+                        <div class="ig-bar">
+                            <button type="button" class="ig-reset" id="ig-reset" disabled>Show full infographic</button>
+                            <a class="ig-full" href="images/visualizing-self/infographic.webp" target="_blank" rel="noopener noreferrer">
+                                <span>Full size</span>
+                                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text version of the data (accessibility + skimmable numbers) -->
+                <details class="ig-text">
+                    <summary>
+                        <i data-lucide="chevron-right" class="chev w-4 h-4"></i>
+                        <span>Read the daily averages as a table</span>
+                    </summary>
+                    <div class="mt-4 rounded-lg border border-slate-200 bg-white overflow-x-auto">
+                        <table class="ig-table">
+                            <caption class="sr-only">Daily averages over five weeks. Highest value in each column marked high, lowest marked low.</caption>
+                            <thead>
+                                <tr><th scope="col">Day</th><th scope="col">Steps</th><th scope="col">Sleep score</th><th scope="col">Exercise min</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><th scope="row">Monday</th><td class="lo">4,466 (low)</td><td>81</td><td class="hi">55 (high)</td></tr>
+                                <tr><th scope="row">Tuesday</th><td>7,851</td><td>79</td><td>31</td></tr>
+                                <tr><th scope="row">Wednesday</th><td>7,535</td><td>74</td><td>50</td></tr>
+                                <tr><th scope="row">Thursday</th><td>7,972</td><td class="lo">63 (low)</td><td>43</td></tr>
+                                <tr><th scope="row">Friday</th><td>6,545</td><td class="hi">83 (high)</td><td>18</td></tr>
+                                <tr><th scope="row">Saturday</th><td class="hi">9,416 (high)</td><td>70</td><td>50</td></tr>
+                                <tr><th scope="row">Sunday</th><td>5,323</td><td>73</td><td class="lo">6 (low)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+
+            </div>
+        </section>
+
+        <!-- AT A GLANCE -->
+        <section class="bg-obsidian text-white py-20">
+            <div class="max-w-5xl mx-auto px-6">
+                <h2 class="text-2xl font-extrabold tracking-tight text-white mb-10">At a Glance</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div class="space-y-2">
+                        <p class="text-[11px] font-bold uppercase tracking-wider text-blue-400">Problem</p>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            How does the rhythm of my week, with work, school, church, and social time, shape how much I move and how well I sleep?
+                        </p>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-[11px] font-bold uppercase tracking-wider text-blue-400">Approach</p>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            I collected five weeks of step, sleep, and exercise data from a fitness tracker, analyzed it in Excel, and designed a one-page infographic.
+                        </p>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-[11px] font-bold uppercase tracking-wider text-blue-400">Result</p>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            The data revealed an inverse pattern: Thursday was my most active weekday but had my lowest sleep score, while Friday rebounded to my highest.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Metrics Row -->
+                <div class="stats-grid-3 pt-6 border-t border-slate-800" style="margin-top: 3rem;">
+                    <div>
+                        <p class="font-display text-2xl sm:text-3xl font-extrabold text-white">5</p>
+                        <p class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold mt-0.5">Weeks of data</p>
+                    </div>
+                    <div>
+                        <p class="font-display text-2xl sm:text-3xl font-extrabold text-white">3</p>
+                        <p class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold mt-0.5">Data types</p>
+                    </div>
+                    <div>
+                        <p class="font-display text-2xl sm:text-3xl font-extrabold text-white">63 to 83</p>
+                        <p class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold mt-0.5">Sleep score range</p>
+                    </div>
+                </div>
+
+                <!-- Tools Row -->
+                <div class="pt-6 border-t border-slate-800 flex flex-col sm:flex-row gap-4" style="margin-top: 3rem;">
+                    <p class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold pt-2" style="min-width: 5rem;">Tools Used</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded text-xs font-semibold bg-slate-900/90 border border-slate-700/80 text-slate-200">
+                            <i data-lucide="watch" class="w-3.5 h-3.5 text-blue-400"></i><span>Fitness &amp; Sleep Tracker</span>
+                        </span>
+                        <span class="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded text-xs font-semibold bg-slate-900/90 border border-slate-700/80 text-slate-200">
+                            <i data-lucide="sheet" class="w-3.5 h-3.5 text-blue-400"></i><span>Microsoft Excel</span>
+                        </span>
+                        <span class="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded text-xs font-semibold bg-slate-900/90 border border-slate-700/80 text-slate-200">
+                            <i data-lucide="presentation" class="w-3.5 h-3.5 text-blue-400"></i><span>Microsoft PowerPoint</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KEY DECISIONS -->
+        <section class="bg-white py-20 border-b border-slate-200">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="mb-10">
+                    <p class="text-xs font-bold uppercase tracking-widest text-pink-600 mb-2">Design Rationale</p>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">Key Decisions</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <article class="border border-slate-200 rounded-lg bg-white p-6 space-y-3 transition-all hover:border-slate-400 hover:-translate-y-1 group">
+                        <p class="font-display text-2xl font-extrabold text-royal-600">01</p>
+                        <h3 class="text-base font-bold text-slate-950 leading-snug group-hover:text-royal-600 transition-colors">Connecting the numbers to real life</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Charts alone don't tell a story, so I annotated each one with what was happening that day: leg days on Mondays, serving at church on Sundays, and busy Thursdays followed by my poorest sleep.
+                        </p>
+                    </article>
+
+                    <article class="border border-slate-200 rounded-lg bg-white p-6 space-y-3 transition-all hover:border-slate-400 hover:-translate-y-1 group">
+                        <p class="font-display text-2xl font-extrabold text-royal-600">02</p>
+                        <h3 class="text-base font-bold text-slate-950 leading-snug group-hover:text-royal-600 transition-colors">Making color do the work</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            I gave each data type its own color (blue for steps, purple for sleep, orange for exercise) and used green and red to mark highs and lows, so readers can spot patterns without decoding a legend.
+                        </p>
+                    </article>
+
+                    <article class="border border-slate-200 rounded-lg bg-white p-6 space-y-3 transition-all hover:border-slate-400 hover:-translate-y-1 group">
+                        <p class="font-display text-2xl font-extrabold text-royal-600">03</p>
+                        <h3 class="text-base font-bold text-slate-950 leading-snug group-hover:text-royal-600 transition-colors">Choosing what to share</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Because this was my own health data, I shared daily and weekly averages instead of raw logs, which kept the story clear and my details private.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEXT PROJECT BAND -->
+        <section class="py-20 bg-obsidian text-slate-100 relative overflow-hidden">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b25_1px,transparent_1px),linear-gradient(to_bottom,#1e293b25_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] pointer-events-none"></div>
+
+            <div class="max-w-5xl mx-auto px-6 relative grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-5">
+                    <p class="text-xs font-bold uppercase tracking-widest text-pink-600">Keep Exploring</p>
+                    <h2 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">
+                        See More Selected Work
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Browse job aids, data stories, and communication strategy projects, or get in touch to talk about your next adoption challenge.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-6 space-y-4">
+                    <!-- Next Project Card (TODO: confirm filename and title of the next project) -->
+                    <a href="apache.html" class="group flex items-center justify-between p-5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/60 hover:bg-slate-800/90 transition-all shadow-lg">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-11 h-11 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all">
+                                <i data-lucide="droplets" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Next Project</div>
+                                <div class="font-display text-sm sm:text-base font-bold text-white group-hover:text-blue-300 transition-colors">Communication Plan for Apache Junction</div>
+                            </div>
+                        </div>
+                        <i data-lucide="arrow-right" class="w-4 h-4 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all"></i>
+                    </a>
+
+                    <!-- Back to Portfolio Card -->
+                    <a href="index.html#portfolio" class="group flex items-center justify-between p-5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/60 hover:bg-slate-800/90 transition-all shadow-lg">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-11 h-11 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all">
+                                <i data-lucide="layout-grid" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Portfolio</div>
+                                <div class="font-display text-sm sm:text-base font-bold text-white group-hover:text-blue-300 transition-colors">Back to Portfolio</div>
+                            </div>
+                        </div>
+                        <i data-lucide="arrow-left" class="w-4 h-4 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer (same as index) -->
+    <footer class="bg-obsidian border-t border-slate-800/80 text-slate-400 py-8 text-xs">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 Heather Gurden</p>
+            <div class="flex items-center space-x-6">
+                <a href="#top" class="text-blue-400 hover:text-blue-300 font-medium transition-colors">↑ Back to Top</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Mobile Menu Toggle & Auto-Close
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Infographic section highlighter
+        (function () {
+            const frame = document.getElementById('ig-frame');
+            const spot = document.getElementById('ig-spot');
+            const reset = document.getElementById('ig-reset');
+            const items = Array.from(document.querySelectorAll('#ig-list .ig-item'));
+            let active = -1;
+
+            function select(i) {
+                active = (i === active) ? -1 : i;   // clicking the active item again clears it
+                items.forEach((it, n) => it.setAttribute('aria-pressed', n === active ? 'true' : 'false'));
+                reset.disabled = active === -1;
+
+                if (active === -1) {
+                    frame.classList.remove('has-focus');
+                    return;
+                }
+                const it = items[active];
+                spot.style.top = it.dataset.top + '%';
+                spot.style.height = it.dataset.height + '%';
+                frame.classList.add('has-focus');
+
+                // On stacked (mobile) layouts the guide sits below the image, so bring the highlighted region into view
+                if (window.matchMedia('(max-width: 47.99rem)').matches) {
+                    const r = frame.getBoundingClientRect();
+                    const y = window.scrollY + r.top + r.height * (parseFloat(it.dataset.top) / 100) - 96;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                }
+            }
+
+            items.forEach((item, i) => item.addEventListener('click', () => select(i)));
+            reset.addEventListener('click', () => select(active));
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && active !== -1) select(active);
+            });
+        })();
+    </script>
+</body>
+</html>

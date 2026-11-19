@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Communication strategy case study: a water conservation communication plan that maps key messages, tactics, and channels to six audiences to help Apache Junction, Arizona reduce water use by 5%.">
+    <title>Communication Plan for Apache Junction | Heather Gurden</title>
+    <!-- CSS -->
+    <link href="./output.css" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #111827;
+            background-color: #FFFFFF;
+        }
+        h1, h2, h3, .font-display {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        /* Minimalist scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F8FAFC; }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+        /* Page-specific layout helpers (not in output.css yet) */
+        .stats-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+        @media (min-width: 40rem) {
+            .stats-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+
+        /* ===== Document viewer ===== */
+        .doc {
+            display: grid;
+            grid-template-columns: 1fr;
+            border: 1px solid #E2E8F0;
+            border-radius: 0.75rem;
+            background: #FFFFFF;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -12px rgba(15, 23, 42, 0.18);
+        }
+        @media (min-width: 48rem) {
+            .doc { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
+        }
+        .doc:focus-visible {
+            outline: 2px solid #2563EB;
+            outline-offset: 3px;
+        }
+
+        /* Left: the "desk" the page sits on */
+        .doc-stage {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 3.5rem;
+            background: #F1F5F9;
+            background-image: radial-gradient(#E2E8F0 1px, transparent 1px);
+            background-size: 16px 16px;
+            touch-action: pan-y;
+        }
+        .doc-page {
+            position: relative;
+            width: 100%;
+            max-width: 26rem;
+            aspect-ratio: 8.5 / 11;
+            background: #FFFFFF;
+            border-radius: 0.25rem;
+            box-shadow:
+                0 1px 2px rgba(15, 23, 42, 0.06),
+                0 12px 28px -10px rgba(15, 23, 42, 0.28);
+            overflow: hidden;
+        }
+        /* Placeholder label shows until the page image loads */
+        .doc-page::before {
+            content: attr(data-label);
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 0.875rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #94A3B8;
+        }
+        .doc-page img {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            transition: opacity 220ms ease;
+        }
+        .doc-page img.is-swapping { opacity: 0; }
+
+        .doc-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid #E2E8F0;
+            color: #0F172A;
+            box-shadow: 0 4px 12px -4px rgba(15, 23, 42, 0.25);
+            cursor: pointer;
+            transition: background-color 150ms, color 150ms, opacity 150ms;
+            z-index: 2;
+        }
+        .doc-btn:hover { background: #2563EB; color: #FFFFFF; border-color: #2563EB; }
+        .doc-btn:focus-visible { outline: 2px solid #2563EB; outline-offset: 2px; }
+        .doc-btn[disabled] { opacity: 0; pointer-events: none; }
+        .doc-btn.prev { left: 0.75rem; }
+        .doc-btn.next { right: 0.75rem; }
+
+        /* Right: page guide */
+        .doc-guide {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid #F1F5F9;
+        }
+        @media (min-width: 48rem) {
+            .doc-guide { border-top: 0; border-left: 1px solid #F1F5F9; }
+        }
+        .doc-guide-head {
+            padding: 1.25rem 1.5rem 0.75rem;
+        }
+        .doc-list {
+            list-style: none;
+            margin: 0;
+            padding: 0 0.75rem 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        .doc-item {
+            width: 100%;
+            text-align: left;
+            display: flex;
+            gap: 0.875rem;
+            padding: 0.875rem 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid transparent;
+            background: transparent;
+            cursor: pointer;
+            transition: background-color 150ms, border-color 150ms;
+        }
+        .doc-item:hover { background: #F8FAFC; }
+        .doc-item:focus-visible { outline: 2px solid #2563EB; outline-offset: 1px; }
+        .doc-item[aria-current="true"] {
+            background: #EFF6FF;
+            border-color: #BFDBFE;
+        }
+        .doc-item-num {
+            flex: 0 0 auto;
+            width: 1.75rem;
+            height: 1.75rem;
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 800;
+            background: #F1F5F9;
+            color: #475569;
+            transition: background-color 150ms, color 150ms;
+        }
+        .doc-item[aria-current="true"] .doc-item-num {
+            background: #2563EB;
+            color: #FFFFFF;
+        }
+        .doc-item-title {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #0F172A;
+            line-height: 1.3;
+        }
+        .doc-item-desc {
+            display: block;
+            margin-top: 0.25rem;
+            font-size: 0.75rem;
+            color: #64748B;
+            line-height: 1.5;
+        }
+        .doc-bar {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.875rem 1.5rem;
+            border-top: 1px solid #F1F5F9;
+        }
+        .doc-counter {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #475569;
+            font-variant-numeric: tabular-nums;
+        }
+        .doc-full {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #2563EB;
+            white-space: nowrap;
+        }
+        .doc-full:hover { color: #1D4ED8; }
+
+        @media (max-width: 30rem) {
+            .doc-stage { padding: 1.5rem 2.75rem; }
+            .doc-btn { width: 2.125rem; height: 2.125rem; }
+            .doc-btn.prev { left: 0.375rem; }
+            .doc-btn.next { right: 0.375rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .doc-page img { transition: none; }
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-900 antialiased selection:bg-royal-600 selection:text-white relative">
+
+    <!-- Global Sticky Navigation Header -->
+    <header class="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-sm border-b border-slate-200 transition-all">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html#home" class="group flex items-center space-x-2.5">
+                    <div class="w-8 h-8 rounded bg-obsidian flex items-center justify-center text-white font-display font-bold text-sm group-hover:bg-royal-600 transition-colors">
+                        HG
+                    </div>
+                    <span class="font-display font-bold text-base text-slate-900 tracking-tight group-hover:text-royal-600 transition-colors">
+                        Heather Gurden
+                    </span>
+                </a>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <nav class="flex items-center space-x-7 text-sm font-medium text-slate-600">
+                        <a href="index.html#home" class="hover:text-royal-600 transition-colors">Home</a>
+                        <a href="index.html#portfolio" class="hover:text-royal-600 transition-colors">My Work</a>
+                        <a href="index.html#about" class="hover:text-royal-600 transition-colors">About Me</a>
+                        <a href="index.html#contact" class="hover:text-royal-600 transition-colors">Contact</a>
+                    </nav>
+                    <a href="images/hg_resume.pdf"
+                       target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded bg-royal-600 text-white hover:bg-royal-700 transition-colors">
+                        <span>Resume</span>
+                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <div class="flex md:hidden">
+                    <button id="mobile-menu-btn" type="button" aria-label="Open menu" class="p-2 rounded text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 bg-white px-6 pt-2 pb-5 space-y-3">
+            <a href="index.html#home" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">Home</a>
+            <a href="index.html#portfolio" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">My Work</a>
+            <a href="index.html#about" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">About Me</a>
+            <a href="index.html#contact" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">Contact</a>
+            <div class="pt-2 border-t border-slate-100">
+                <a href="images/hg_resume.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center space-x-1.5 w-full py-2.5 text-xs font-semibold rounded bg-royal-600 text-white">
+                    <span>Download Resume</span>
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main id="top">
+
+        <!-- PROJECT HEADER + DOCUMENT VIEWER -->
+        <section class="bg-slate-50 border-b border-slate-200 pt-14 pb-20">
+            <div class="max-w-5xl mx-auto px-6 space-y-6">
+
+                <!-- Breadcrumb -->
+                <nav aria-label="Breadcrumb" class="flex items-center space-x-1.5 text-xs font-medium text-slate-500">
+                    <a href="index.html#portfolio" class="hover:text-royal-600 transition-colors">My Work</a>
+                    <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                    <span class="text-slate-900">Apache Junction Communication Plan</span>
+                </nav>
+
+                <div class="space-y-4">
+                    <p class="text-xs font-bold uppercase tracking-widest text-pink-600">Communication Strategy</p>
+                    <h1 class="text-4xl font-extrabold tracking-tight text-slate-950 leading-tight">
+                        Communication Plan for Apache Junction
+                    </h1>
+                    <p class="text-base text-slate-600 leading-relaxed max-w-xl">
+                        A communication plan that frames water conservation as a shared community goal and maps key messages, tactics, and channels to six audiences to help Apache Junction reduce water use by 5%.
+                    </p>
+                    <p class="text-[11px] font-medium text-royal-600">
+                        Communication Strategy • Stakeholder Analysis • Message Framing • Campaign Planning
+                    </p>
+                </div>
+
+                <!-- Document Viewer -->
+                <div class="flex items-center justify-between gap-4" style="padding-top: 1.5rem;">
+                    <p class="text-xs text-slate-500">Select a section, or use the arrows or your keyboard to page through the plan.</p>
+                    <a href="images\apache\commplanapache.pdf" target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center space-x-1.5 px-4 py-2.5 text-xs font-semibold rounded bg-royal-600 text-white hover:bg-royal-700 transition-colors">
+                        <span>View Full Plan (PDF)</span>
+                    </a>
+                </div>
+
+
+                <div class="doc" id="doc" tabindex="0" role="region" aria-roledescription="document viewer" aria-label="Communication Plan for Apache Junction">
+                    <div class="doc-stage" id="doc-stage">
+                        <div class="doc-page" id="doc-page" data-label="Page 1">
+                            <img id="doc-img" src="images\apache\page-01.webp" alt="Page 1 of the Apache Junction communication plan" loading="eager">
+                        </div>
+                        <button type="button" class="doc-btn prev" id="doc-prev" aria-label="Previous page">
+                            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                        </button>
+                        <button type="button" class="doc-btn next" id="doc-next" aria-label="Next page">
+                            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+
+                    <div class="doc-guide">
+                        <div class="doc-guide-head">
+                            <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Inside the Plan</p>
+                        </div>
+                        <ol class="doc-list" id="doc-list">
+                            <li>
+                                <button type="button" class="doc-item"
+                                        data-src="images/apache/page-01.webp"
+                                        data-label="Page 1"
+                                        data-alt="Page 1: campaign goal, audiences, and key messages">
+                                    <span class="doc-item-num">1</span>
+                                    <span>
+                                        <span class="doc-item-title">Goal, Audiences &amp; Key Messages</span>
+                                        <span class="doc-item-desc">The 5% reduction goal and the shared-ownership messages built around the city's "One Water: Our Water" program.</span>
+                                    </span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="doc-item"
+                                        data-src="images/apache/page-02.webp"
+                                        data-label="Page 2"
+                                        data-alt="Page 2: tactics, channels, and evaluation measures">
+                                    <span class="doc-item-num">2</span>
+                                    <span>
+                                        <span class="doc-item-title">Tactics, Channels &amp; Evaluation</span>
+                                        <span class="doc-item-desc">Campaign tactics on channels the city already runs, with measures for tracking progress toward the goal.</span>
+                                    </span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="doc-item"
+                                        data-src="images/apache/page-03.webp"
+                                        data-label="Appendix"
+                                        data-alt="Appendix: audience strategy with messenger, channel, and frequency for each of six audiences">
+                                    <span class="doc-item-num">A</span>
+                                    <span>
+                                        <span class="doc-item-title">Appendix: Audience Strategy</span>
+                                        <span class="doc-item-desc">Six audiences, each with its own messenger, channel, and frequency.</span>
+                                    </span>
+                                </button>
+                            </li>
+                        </ol>
+                        <div class="doc-bar">
+                            <p class="doc-counter" id="doc-counter">1 / 3</p>
+                            <a class="doc-full" id="doc-full" href="images/apache-junction/page-01.webp" target="_blank" rel="noopener noreferrer">
+                                <span>Full size</span>
+                                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- AT A GLANCE -->
+        <section class="bg-obsidian text-white py-20">
+            <div class="max-w-5xl mx-auto px-6">
+                <h2 class="text-2xl font-extrabold tracking-tight text-white mb-10">At a Glance</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div class="space-y-2">
+                        <p class="text-[11px] font-bold uppercase tracking-wider text-blue-400">Problem</p>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            East Valley developers wanted Apache Junction, Arizona residents, businesses, and schools to reduce water use by 5%, without messaging that feels like a restriction.
+                        </p>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-[11px] font-bold uppercase tracking-wider text-blue-400">Approach</p>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            As a media consultant, I researched the city's existing conservation program and communication channels, then built a two-page plan of key messages, tactics, channels, and evaluation measures.
+                        </p>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-[11px] font-bold uppercase tracking-wider text-blue-400">Result</p>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            A campaign that frames conservation as a shared responsibility and can launch on channels the city already runs.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Metrics Row -->
+                <div class="stats-grid-3 pt-6 border-t border-slate-800" style="margin-top: 3rem;">
+                    <div>
+                        <p class="font-display text-2xl sm:text-3xl font-extrabold text-white">6</p>
+                        <p class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold mt-0.5">Audiences</p>
+                    </div>
+                    <div>
+                        <p class="font-display text-2xl sm:text-3xl font-extrabold text-white">5%</p>
+                        <p class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold mt-0.5">Reduction goal</p>
+                    </div>
+                    <div>
+                        <p class="font-display text-2xl sm:text-3xl font-extrabold text-white">2-page</p>
+                        <p class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold mt-0.5">Plan with strategy appendix</p>
+                    </div>
+                </div>
+
+                <!-- Tools Row -->
+                <div class="pt-6 border-t border-slate-800 flex flex-col sm:flex-row gap-4" style="margin-top: 3rem;">
+                    <p class="text-[11px] text-slate-400 uppercase tracking-wider font-semibold pt-2" style="min-width: 5rem;">Tools Used</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded text-xs font-semibold bg-slate-900/90 border border-slate-700/80 text-slate-200">
+                            <i data-lucide="file-text" class="w-3.5 h-3.5 text-blue-400"></i><span>Google Docs</span>
+                        </span>
+                        <span class="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded text-xs font-semibold bg-slate-900/90 border border-slate-700/80 text-slate-200">
+                            <i data-lucide="users" class="w-3.5 h-3.5 text-blue-400"></i><span>Team Collaboration</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KEY DECISIONS -->
+        <section class="bg-white py-20 border-b border-slate-200">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="mb-10">
+                    <p class="text-xs font-bold uppercase tracking-widest text-pink-600 mb-2">Strategy Rationale</p>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">Key Decisions</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <article class="border border-slate-200 rounded-lg bg-white p-6 space-y-3 transition-all hover:border-slate-400 hover:-translate-y-1 group">
+                        <p class="font-display text-2xl font-extrabold text-royal-600">01</p>
+                        <h3 class="text-base font-bold text-slate-950 leading-snug group-hover:text-royal-600 transition-colors">Framing conservation as shared ownership</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Scarcity and blame messages can make people defensive. Instead, the key messages tell residents the community's future is in their hands and promote the city's own "One Water: Our Water" program in its own language.
+                        </p>
+                    </article>
+
+                    <article class="border border-slate-200 rounded-lg bg-white p-6 space-y-3 transition-all hover:border-slate-400 hover:-translate-y-1 group">
+                        <p class="font-display text-2xl font-extrabold text-royal-600">02</p>
+                        <h3 class="text-base font-bold text-slate-950 leading-snug group-hover:text-royal-600 transition-colors">Six audiences, six strategies</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            A golf course owner and a tourist need different reasons to save water. I split "the public" into six audiences, each with its own messenger, channel, and frequency, and paired compliance standards with tax incentives for businesses.
+                        </p>
+                    </article>
+
+                    <article class="border border-slate-200 rounded-lg bg-white p-6 space-y-3 transition-all hover:border-slate-400 hover:-translate-y-1 group">
+                        <p class="font-display text-2xl font-extrabold text-royal-600">03</p>
+                        <h3 class="text-base font-bold text-slate-950 leading-snug group-hover:text-royal-600 transition-colors">Building on what the city already had</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Every channel in the plan, from AJ Cable Channel 11 to the Citizen Leadership Institute, already exists, so the campaign needs no new systems. The full audience strategy sits in an appendix, keeping the plan readable for busy decision makers.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEXT PROJECT BAND -->
+        <section class="py-20 bg-obsidian text-slate-100 relative overflow-hidden">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b25_1px,transparent_1px),linear-gradient(to_bottom,#1e293b25_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] pointer-events-none"></div>
+
+            <div class="max-w-5xl mx-auto px-6 relative grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-5">
+                    <p class="text-xs font-bold uppercase tracking-widest text-pink-600">Keep Exploring</p>
+                    <h2 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">
+                        See More Selected Work
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Browse job aids, data stories, and communication strategy projects, or get in touch to talk about your next adoption challenge.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-6 space-y-4">
+                    <!-- Next Project Card (TODO: confirm filename and title of the next project) -->
+                    <a href="leadership-communication.html" class="group flex items-center justify-between p-5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/60 hover:bg-slate-800/90 transition-all shadow-lg">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-11 h-11 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all">
+                                <i data-lucide="presentation" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Next Project</div>
+                                <div class="font-display text-sm sm:text-base font-bold text-white group-hover:text-blue-300 transition-colors">Best Practices for Leadership Communication</div>
+                            </div>
+                        </div>
+                        <i data-lucide="arrow-right" class="w-4 h-4 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all"></i>
+                    </a>
+
+                    <!-- Back to Portfolio Card -->
+                    <a href="index.html#portfolio" class="group flex items-center justify-between p-5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/60 hover:bg-slate-800/90 transition-all shadow-lg">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-11 h-11 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all">
+                                <i data-lucide="layout-grid" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Portfolio</div>
+                                <div class="font-display text-sm sm:text-base font-bold text-white group-hover:text-blue-300 transition-colors">Back to Portfolio</div>
+                            </div>
+                        </div>
+                        <i data-lucide="arrow-left" class="w-4 h-4 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer (same as index) -->
+    <footer class="bg-obsidian border-t border-slate-800/80 text-slate-400 py-8 text-xs">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 Heather Gurden</p>
+            <div class="flex items-center space-x-6">
+                <a href="#top" class="text-blue-400 hover:text-blue-300 font-medium transition-colors">↑ Back to Top</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Mobile Menu Toggle & Auto-Close
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Document Viewer
+        (function () {
+            const doc = document.getElementById('doc');
+            const stage = document.getElementById('doc-stage');
+            const page = document.getElementById('doc-page');
+            const img = document.getElementById('doc-img');
+            const items = Array.from(document.querySelectorAll('#doc-list .doc-item'));
+            const prevBtn = document.getElementById('doc-prev');
+            const nextBtn = document.getElementById('doc-next');
+            const counter = document.getElementById('doc-counter');
+            const fullLink = document.getElementById('doc-full');
+            const total = items.length;
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            let index = 0;
+
+            // Preload the other pages so switching feels instant
+            items.forEach(item => { const p = new Image(); p.src = item.dataset.src; });
+
+            function goTo(i) {
+                const next = Math.max(0, Math.min(total - 1, i));
+                const item = items[next];
+                const changed = next !== index || img.getAttribute('src') !== item.dataset.src;
+                index = next;
+
+                const swap = () => {
+                    img.src = item.dataset.src;
+                    img.alt = item.dataset.alt;
+                    page.dataset.label = item.dataset.label;
+                    img.classList.remove('is-swapping');
+                };
+                if (changed && !reduceMotion) {
+                    img.classList.add('is-swapping');
+                    setTimeout(swap, 180);
+                } else {
+                    swap();
+                }
+
+                items.forEach((it, n) => it.setAttribute('aria-current', n === index ? 'true' : 'false'));
+                counter.textContent = `${index + 1} / ${total}`;
+                prevBtn.disabled = index === 0;
+                nextBtn.disabled = index === total - 1;
+                fullLink.href = item.dataset.full || item.dataset.src;
+            }
+
+            items.forEach((item, i) => item.addEventListener('click', () => goTo(i)));
+            prevBtn.addEventListener('click', () => goTo(index - 1));
+            nextBtn.addEventListener('click', () => goTo(index + 1));
+
+            // Keyboard: arrows, Home, End when the viewer has focus
+            doc.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); goTo(index - 1); }
+                else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); goTo(index + 1); }
+                else if (e.key === 'Home') { e.preventDefault(); goTo(0); }
+                else if (e.key === 'End') { e.preventDefault(); goTo(total - 1); }
+            });
+
+            // Swipe on touch devices
+            let startX = null;
+            stage.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+            stage.addEventListener('touchend', (e) => {
+                if (startX === null) return;
+                const dx = e.changedTouches[0].clientX - startX;
+                if (Math.abs(dx) > 40) goTo(index + (dx < 0 ? 1 : -1));
+                startX = null;
+            });
+
+            goTo(0);
+        })();
+    </script>
+</body>
+</html>
