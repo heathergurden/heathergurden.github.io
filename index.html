@@ -51,7 +51,7 @@
                     </span>
                 </a>
 
-                <!-- Right-Aligned Navigation & Resume Button -->
+                <!-- Right-Aligned Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
                     <nav class="flex items-center space-x-7 text-sm font-medium text-slate-600">
                         <a href="#home" class="hover:text-royal-600 transition-colors">Home</a>
@@ -60,13 +60,6 @@
                         <a href="#contact" class="hover:text-royal-600 transition-colors">Contact</a>
                     </nav>
 
-                    <a href="images/hg_resume.pdf" 
-                       target="_blank" 
-                       rel="noopener noreferrer" 
-                       class="inline-flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded bg-royal-600 text-white hover:bg-royal-700 transition-colors">
-                        <span>Resume</span>
-                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-                    </a>
                 </div>
 
                 <!-- Mobile menu button -->
@@ -84,12 +77,7 @@
             <a href="#portfolio" onclick="closeMobileMenu()" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">My Work</a>
             <a href="#about" onclick="closeMobileMenu()" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">About Me</a>
             <a href="#contact" onclick="closeMobileMenu()" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">Contact</a>
-            <div class="pt-2 border-t border-slate-100">
-                <a href="images/hg_resume.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center space-x-1.5 w-full py-2.5 text-xs font-semibold rounded bg-royal-600 text-white">
-                    <span>Resume</span>
-                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-                </a>
-            </div>
+
         </div>
     </header>
 
@@ -188,7 +176,7 @@
                             Job Aids &amp; Editing
                         </button>
                         <button onclick="filterPortfolio('dataviz')" class="filter-btn px-3.5 py-1.5 rounded text-xs font-semibold transition-colors bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="dataviz">
-                            Data Viz
+                            Data Visualization
                         </button>
                         <button onclick="filterPortfolio('webux')" class="filter-btn px-3.5 py-1.5 rounded text-xs font-semibold transition-colors bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="webux">
                             Web &amp; UX
@@ -204,47 +192,8 @@
 
 
 
-                    <!-- Card 2: Library Homepage Redesign -->
-                    <article onclick="openArtifact('meridian')" class="portfolio-card border border-slate-200 rounded-lg overflow-hidden bg-white hover:border-slate-400 transition-all cursor-pointer hover:-translate-y-1 flex flex-col group" data-category="webux">
-                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
-                            <div>
-                                <p class="text-[11px] font-bold uppercase tracking-wider text-pink-600 mb-1">UX Case Study</p>
-                                <h3 class="text-base font-bold text-slate-950 group-hover:text-royal-600 transition-colors">Library Homepage Redesign</h3>
-                                <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
-                                    Meridian Library District homepage redesign, from patron surveys to usability tests, built for first-time and less web-savvy visitors.
-                                </p>
-                            </div>
-                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                                <span class="text-[11px] font-medium text-royal-600">UX Research • Figma</span>
-                                <span class="text-xs font-semibold text-slate-900 group-hover:text-royal-600 inline-flex items-center space-x-1">
-                                    <span>View Artifact</span>
-                                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </article>
 
-                    <!-- Card 3: Timekeeping Quick Reference Guides -->
-                    <article onclick="openArtifact('timekeeping')" class="portfolio-card border border-slate-200 rounded-lg overflow-hidden bg-white hover:border-slate-400 transition-all cursor-pointer hover:-translate-y-1 flex flex-col group" data-category="jobaids">
-                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
-                            <div>
-                                <p class="text-[11px] font-bold uppercase tracking-wider text-pink-600 mb-1">Job Aid • Instructional Design</p>
-                                <h3 class="text-base font-bold text-slate-950 group-hover:text-royal-600 transition-colors">Timekeeping Quick Reference Guides</h3>
-                                <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
-                                    Just-in-time, task-based guides that helped attorneys and staff record time correctly from day one of a new system rollout.
-                                </p>
-                            </div>
-                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                                <span class="text-[11px] font-medium text-royal-600">Job Aids • Change Enablement</span>
-                                <span class="text-xs font-semibold text-slate-900 group-hover:text-royal-600 inline-flex items-center space-x-1">
-                                    <span>View Artifact</span>
-                                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Card 4: Crime & Curiosity in Idaho -->
+                    <!-- Card: Crime & Curiosity in Idaho -->
                     <article onclick="openArtifact('crime')" class="portfolio-card border border-slate-200 rounded-lg overflow-hidden bg-white hover:border-slate-400 transition-all cursor-pointer hover:-translate-y-1 flex flex-col group" data-category="dataviz">
                         <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
                             <div>
@@ -264,7 +213,7 @@
                         </div>
                     </article>
 
-                    <!-- Card 5: Apache Junction Communication Plan -->
+                    <!-- Card: Apache Junction Communication Plan -->
                     <article onclick="openArtifact('apache')" class="portfolio-card border border-slate-200 rounded-lg overflow-hidden bg-white hover:border-slate-400 transition-all cursor-pointer hover:-translate-y-1 flex flex-col group" data-category="strategy">
                         <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
                             <div>
@@ -284,27 +233,7 @@
                         </div>
                     </article>
 
-                    <!-- Card 6: Leadership Communication Best Practices -->
-                    <article onclick="openArtifact('leadership')" class="portfolio-card border border-slate-200 rounded-lg overflow-hidden bg-white hover:border-slate-400 transition-all cursor-pointer hover:-translate-y-1 flex flex-col group" data-category="strategy">
-                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
-                            <div>
-                                <p class="text-[11px] font-bold uppercase tracking-wider text-pink-600 mb-1">Presentation Design</p>
-                                <h3 class="text-base font-bold text-slate-950 group-hover:text-royal-600 transition-colors">Leadership Communication Best Practices</h3>
-                                <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
-                                    A 15-minute talk pairing four leadership behaviors with practical tools to prevent the leading cause of project failure.
-                                </p>
-                            </div>
-                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                                <span class="text-[11px] font-medium text-royal-600">Visual Storytelling • PowerPoint</span>
-                                <span class="text-xs font-semibold text-slate-900 group-hover:text-royal-600 inline-flex items-center space-x-1">
-                                    <span>View Artifact</span>
-                                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Card 7: The Pearson Page Collection -->
+                    <!-- Card: The Pearson Page Collection -->
                     <article onclick="openArtifact('pearson')" class="portfolio-card border border-slate-200 rounded-lg overflow-hidden bg-white hover:border-slate-400 transition-all cursor-pointer hover:-translate-y-1 flex flex-col group" data-category="webux">
                         <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
                             <div>
@@ -324,7 +253,7 @@
                         </div>
                     </article>
 
-                    <!-- Card 8: Visualizing the Self -->
+                    <!-- Card: Visualizing the Self -->
                     <article onclick="openArtifact('self')" class="portfolio-card border border-slate-200 rounded-lg overflow-hidden bg-white hover:border-slate-400 transition-all cursor-pointer hover:-translate-y-1 flex flex-col group" data-category="dataviz">
                         <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
                             <div>
@@ -343,6 +272,67 @@
                             </div>
                         </div>
                     </article>
+                    
+                    <!-- Card: Library Homepage Redesign -->
+                    <article onclick="openArtifact('meridian')" class="portfolio-card border border-slate-200 rounded-lg overflow-hidden bg-white hover:border-slate-400 transition-all cursor-pointer hover:-translate-y-1 flex flex-col group" data-category="webux">
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <p class="text-[11px] font-bold uppercase tracking-wider text-pink-600 mb-1">UX Case Study</p>
+                                <h3 class="text-base font-bold text-slate-950 group-hover:text-royal-600 transition-colors">Library Homepage Redesign</h3>
+                                <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
+                                    Meridian Library District homepage redesign, from patron surveys to usability tests, built for first-time and less web-savvy visitors.
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-[11px] font-medium text-royal-600">UX Research • Figma</span>
+                                <span class="text-xs font-semibold text-slate-900 group-hover:text-royal-600 inline-flex items-center space-x-1">
+                                    <span>View Artifact</span>
+                                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card: Timekeeping Quick Reference Guides -->
+                    <article onclick="openArtifact('timekeeping')" class="portfolio-card border border-slate-200 rounded-lg overflow-hidden bg-white hover:border-slate-400 transition-all cursor-pointer hover:-translate-y-1 flex flex-col group" data-category="jobaids">
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <p class="text-[11px] font-bold uppercase tracking-wider text-pink-600 mb-1">Job Aid • Instructional Design</p>
+                                <h3 class="text-base font-bold text-slate-950 group-hover:text-royal-600 transition-colors">Timekeeping Quick Reference Guides</h3>
+                                <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
+                                    Just-in-time, task-based guides that helped attorneys and staff record time correctly from day one of a new system rollout.
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-[11px] font-medium text-royal-600">Job Aids • Change Enablement</span>
+                                <span class="text-xs font-semibold text-slate-900 group-hover:text-royal-600 inline-flex items-center space-x-1">
+                                    <span>View Artifact</span>
+                                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card: Leadership Communication Best Practices -->
+                    <article onclick="openArtifact('leadership')" class="portfolio-card border border-slate-200 rounded-lg overflow-hidden bg-white hover:border-slate-400 transition-all cursor-pointer hover:-translate-y-1 flex flex-col group" data-category="strategy">
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <p class="text-[11px] font-bold uppercase tracking-wider text-pink-600 mb-1">Presentation Design</p>
+                                <h3 class="text-base font-bold text-slate-950 group-hover:text-royal-600 transition-colors">Leadership Communication Best Practices</h3>
+                                <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
+                                    A 15-minute talk pairing four leadership behaviors with practical tools to prevent the leading cause of project failure.
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-[11px] font-medium text-royal-600">Visual Storytelling • PowerPoint</span>
+                                <span class="text-xs font-semibold text-slate-900 group-hover:text-royal-600 inline-flex items-center space-x-1">
+                                    <span>View Artifact</span>
+                                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
 
                 </div>
             </div>
@@ -444,7 +434,7 @@
                             </div>
                             <div>
                                 <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Direct Email</div>
-                                <div class="font-display text-sm sm:text-base font-bold text-white">heathergurden@gmail.com</div>
+                                <div class="font-display text-sm sm:text-base font-bold text-white">heathergurden@outlook.com</div>
                             </div>
                         </div>
                     </a>

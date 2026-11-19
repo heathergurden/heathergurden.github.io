@@ -70,12 +70,6 @@
                         <a href="index.html#about" class="hover:text-royal-600 transition-colors">About Me</a>
                         <a href="index.html#contact" class="hover:text-royal-600 transition-colors">Contact</a>
                     </nav>
-                    <a href="images/hg_resume.pdf"
-                       target="_blank" rel="noopener noreferrer"
-                       class="inline-flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded bg-royal-600 text-white hover:bg-royal-700 transition-colors">
-                        <span>Resume</span>
-                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-                    </a>
                 </div>
 
                 <div class="flex md:hidden">
@@ -91,18 +85,12 @@
             <a href="index.html#portfolio" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">My Work</a>
             <a href="index.html#about" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">About Me</a>
             <a href="index.html#contact" class="block py-2 text-slate-700 hover:text-royal-600 font-medium text-sm">Contact</a>
-            <div class="pt-2 border-t border-slate-100">
-                <a href="images/hg_resume.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center space-x-1.5 w-full py-2.5 text-xs font-semibold rounded bg-royal-600 text-white">
-                    <span>Download Resume</span>
-                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-                </a>
-            </div>
         </div>
     </header>
 
     <main id="top">
 
-        <!-- PROJECT HEADER (light, editorial: distinct from the dark homepage hero) -->
+        <!-- PROJECT HEADER -->
         <section class="bg-slate-50 border-b border-slate-200 pt-14 pb-20">
             <div class="max-w-5xl mx-auto px-6 space-y-6">
 
@@ -127,9 +115,53 @@
                 </div>
 
             </div>
+ 
+
+        <!-- Before / After -->
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10" style="padding-top: 1.5rem;">
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Before &amp; After</p>
+                        
+                    </div>
+                    <a href="images/library/casestudy_lib.pdf" target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center space-x-1.5 px-4 py-2.5 text-xs font-semibold rounded bg-royal-600 text-white hover:bg-royal-700 transition-colors">
+                        <span>View Full Case Study (PDF)</span>
+                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <div class="compare-grid">
+                    <!-- Before -->
+                    <figure class="border border-slate-200 rounded-lg overflow-hidden bg-white transition-all hover:border-slate-400 group">
+                        <a href="images/library/mld_before.webp" target="_blank" rel="noopener noreferrer" class="compare-frame block bg-slate-100">
+                            <img src="images/library/mld_before_thumb.webp"
+                                 alt="Original Meridian Library District homepage with a busy, colorful layout"
+                                 class="w-full object-cover object-top" loading="lazy">
+                        </a>
+                        <figcaption class="p-5 border-t border-slate-100">
+                            <p class="text-[11px] font-bold uppercase tracking-wider text-pink-600 mb-1">Before</p>
+                            <p class="text-xs text-slate-600 leading-relaxed">Dense navigation, competing colors, and key tasks buried below the fold.</p>
+                        </figcaption>
+                    </figure>
+
+                    <!-- After -->
+                    <figure class="border border-slate-200 rounded-lg overflow-hidden bg-white transition-all hover:border-slate-400 group">
+                        <a href="images/library/mld_after.webp" target="_blank" rel="noopener noreferrer" class="compare-frame block bg-slate-100">
+                            <img src="images/library/mld_after_thumb.webp"
+                                 alt="Redesigned homepage with a hero catalog search and clear panels for hours and events"
+                                 class="w-full object-cover object-top" loading="lazy">
+                        </a>
+                        <figcaption class="p-5 border-t border-slate-100">
+                            <p class="text-[11px] font-bold uppercase tracking-wider text-pink-600 mb-1">After</p>
+                            <p class="text-xs text-slate-600 leading-relaxed">Catalog search leads the page, with hours and upcoming events directly below.</p>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
         </section>
 
-        <!-- AT A GLANCE (compact dark band: Problem / Approach / Result + metrics) -->
+                <!-- AT A GLANCE (compact dark band: Problem / Approach / Result + metrics) -->
         <section class="bg-obsidian text-white py-20">
             <div class="max-w-5xl mx-auto px-6">
                 <h2 class="text-2xl font-extrabold tracking-tight text-white mb-10">At a Glance</h2>
@@ -192,52 +224,6 @@
                             <i data-lucide="file-text" class="w-3.5 h-3.5 text-blue-400"></i><span>Microsoft Word</span>
                         </span>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- PREVIEW: Before / After -->
-        <section class="bg-white py-20 border-b border-slate-200">
-            <div class="max-w-5xl mx-auto px-6">
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-                    <div>
-                        <p class="text-xs font-bold uppercase tracking-widest text-pink-600 mb-2">Preview</p>
-                        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">Before &amp; After</h2>
-                        <p class="text-xs text-slate-500 mt-2">Click an image to view it full size.</p>
-                    </div>
-                    <a href="#" target="_blank" rel="noopener noreferrer"
-                       class="inline-flex items-center space-x-1.5 px-4 py-2.5 text-xs font-semibold rounded bg-royal-600 text-white hover:bg-royal-700 transition-colors">
-                        <span>View Full Case Study (PDF)</span>
-                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-                    </a>
-                </div>
-
-                <div class="compare-grid">
-                    <!-- Before -->
-                    <figure class="border border-slate-200 rounded-lg overflow-hidden bg-white transition-all hover:border-slate-400 group">
-                        <a href="images/library/mld_before.webp" target="_blank" rel="noopener noreferrer" class="compare-frame block bg-slate-100">
-                            <img src="images/library/mld_before_thumb.webp"
-                                 alt="Original Meridian Library District homepage with a busy, colorful layout"
-                                 class="w-full object-cover object-top" loading="lazy">
-                        </a>
-                        <figcaption class="p-5 border-t border-slate-100">
-                            <p class="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">Before</p>
-                            <p class="text-xs text-slate-600 leading-relaxed">Dense navigation, competing colors, and key tasks buried below the fold.</p>
-                        </figcaption>
-                    </figure>
-
-                    <!-- After -->
-                    <figure class="border border-slate-200 rounded-lg overflow-hidden bg-white transition-all hover:border-slate-400 group">
-                        <a href="images/library/mld_after.webp" target="_blank" rel="noopener noreferrer" class="compare-frame block bg-slate-100">
-                            <img src="images/library/mld_after_thumb.webp"
-                                 alt="Redesigned homepage with a hero catalog search and clear panels for hours and events"
-                                 class="w-full object-cover object-top" loading="lazy">
-                        </a>
-                        <figcaption class="p-5 border-t border-slate-100">
-                            <p class="text-[11px] font-bold uppercase tracking-wider text-pink-600 mb-1">After</p>
-                            <p class="text-xs text-slate-600 leading-relaxed">Catalog search leads the page, with hours and upcoming events directly below.</p>
-                        </figcaption>
-                    </figure>
                 </div>
             </div>
         </section>
